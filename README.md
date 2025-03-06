@@ -6,7 +6,7 @@ Qual quer informação que não esteja aqui vai estar documentado no própio có
 
 Caso alguma pasta e ou arquivo não esteja criada pergunte a equipe se alguem já criou ela e como ele a nomeou ou apenas olhe no cmmit. Se não achar pergunte
 
-O comando "app.set("view engine", "ejs");" seta o ejs como o interpretador de html ou seja ao invés de por .html agora é .ejs, todos os arquivos .ejs e .css devem ficar dentro da pasta public ou no nome da pasta q foi setada pode criar subpastas para separar melhor desde q o front esteja dentro da pasta setada
+O comando "app.set("view engine", "ejs");" seta o ejs como o interpretador de html ou seja ao invés de por .html agora é .ejs, todos os arquivos .ejs devem estar obrigatóriamente dentro da pasta views (o navegador consegue encontra ela então se forem botar algum caminho q vem de dentro dela n precisam citala) e o .css deve ficar dentro da pasta public ou no nome da pasta q foi setada, pode criar subpastas para separar melhor desde q o front esteja dentro da pasta setada. 
 
 O comando "app.use(express.static("public"));" seta a pasta sitada acima
 
