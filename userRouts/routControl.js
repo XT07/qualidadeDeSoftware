@@ -3,10 +3,19 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 
 router.get("/user", (req, res) => {
-    //em andamento
+    let id = req.session.user.id;
+
+    users.findOne({ where: {id:id} }).then(user => {
+        res.sendStatus(200);
+        res.send("Página em desenvolvimento");
+    })
 });
 
-router.get("/loginUser", (req, res) => {
+router.get("/registerUser", (req, res) => {
+    res.send("Em desenvolvimento");
+});
+
+router.post("/loginUser", (req, res) => {
     let cpf = parseInt(req.body.cpf);
     let pass = req.body.password;
 
@@ -21,13 +30,15 @@ router.get("/loginUser", (req, res) => {
                 email: user.email,
                 cpf: user.cpf,
                 pass: pass,
-                dtNsc: user.dtNsc
+                birth_date: user.birth_date,
+                phone: user.phone,
+                recovery_email: user.recovery_email
             }
 
             res.sendStatus(200);
-            //res.redirect("");
+            res.redirect("/user");
         }else{
-            res.sendStatus(400);
+            res.sendStatus(401);
             console.log(`Senha não encontrado no nosso sistema por favor tente novamente`);
         }
         
@@ -40,17 +51,19 @@ router.get("/loginUser", (req, res) => {
 
 router.post("/user", (req, res) => {
     let cpf = parseInt(req.body.cpf);
-    let { name, password, email, dtNsc } = req.body;
+    let { name, password, email, birth_date, phone, recovery_email } = req.body;
 
     users.create({
         name: name,
         email: email,
         cpf: cpf,
         pass: password,
-        dtNsc: dtNsc
+        birth_date: birth_date,
+        phone: phone,
+        recovery_email: recovery_email
     }).then(() => {
         res.sendStatus(200);
-        //res.redirect("");
+        res.redirect("/user");
     }).catch(err => {
         res.sendStatus(400);
         console.log(`Não foi possivel criar o usuário || ERR ${err}`);
@@ -60,19 +73,21 @@ router.post("/user", (req, res) => {
 router.patch("/user", (req, res) => {
     let id = req.session.id;
     let cpf = parseInt(req.body.cpf);
-    let { name, password, email, dtNsc } = req.body;
+    let { name, password, email, birth_date, phone, recovery_email } = req.body;
 
     let subData = {
         name: name,
         password: password,
         email: email,
-        dtNsc: dtNsc,
-        cpf: cpf
+        birth_date: birth_date,
+        cpf: cpf,
+        phone: phone,
+        recovery_email: recovery_email
     }
 
     users.update(subData, { where: { id:id } }).then(() => {
         res.sendStatus(200);
-        //res.redirect("");
+        res.redirect("/user");
     }).catch(err => {
         res.sendStatus(400);
         console.log(`Erro ao tentar atualizar p usuário || ERR ${err}`);
@@ -86,7 +101,7 @@ router.delete("/user", async (req, res) => {
     if(verific){
         users.destroy({ where: {id:id} }).then(user => {
             res.statusCode(200);
-            //res.redirect("");
+            res.redirect("/");
         }).catch(err => {
             res.sendStatus(400);
             console.log(`ID não encontrado no nosso banco de dados | ${err}`);

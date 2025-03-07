@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const routUser = require("./userRouts/routControl.js");
 
 //nesse espaço faça a autenticação do DB
 
@@ -15,6 +16,8 @@ app.use(session({
         maxAge: 2592000000//define o tempo q as informações do usuario ficam salvas no sistema (oq não estiver no DB)
     }
 }))
+
+app.use("/", routUser);
 
 ///aqui colocaremos as rotas sem relação entre si no sentido de que não tem uma certa "administração" em cima delas
 app.get("/", (req, res) => {
