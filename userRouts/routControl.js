@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 
+//rota da conta do usuário
 router.get("/user", (req, res) => {
     let id = req.session.user.id;
 
@@ -11,10 +12,12 @@ router.get("/user", (req, res) => {
     })
 });
 
+//rota da página de cadastro
 router.get("/registerUser", (req, res) => {
-    res.send("Em desenvolvimento");
+    res.render("cadastro");
 });
 
+//rota q faz a consulta no DB das credenciais do login
 router.post("/loginUser", (req, res) => {
     let cpf = parseInt(req.body.cpf);
     let pass = req.body.password;
@@ -49,6 +52,7 @@ router.post("/loginUser", (req, res) => {
 
 });
 
+//rota que cria um novo usuário
 router.post("/user", (req, res) => {
     let cpf = parseInt(req.body.cpf);
     let { name, password, email, birth_date, phone, recovery_email } = req.body;
@@ -70,6 +74,7 @@ router.post("/user", (req, res) => {
     })
 });
 
+//rota que atualiza parcialmente o usuário
 router.patch("/user", (req, res) => {
     let id = req.session.id;
     let cpf = parseInt(req.body.cpf);
@@ -94,6 +99,7 @@ router.patch("/user", (req, res) => {
     })
 });
 
+//rota que deleta o usuário
 router.delete("/user", async (req, res) => {
     let id = parseInt(req.body.id);
     let verific = await users.findOne({ where: {id:id} });

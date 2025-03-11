@@ -21,7 +21,7 @@ app.use("/", routUser);
 
 ///aqui colocaremos as rotas sem relação entre si no sentido de que não tem uma certa "administração" em cima delas
 app.get("/", (req, res) => {
-    res.send("Aguardando a criação da página principal");
+    res.render("index");
 })
 
 app.listen(3030, () => {
