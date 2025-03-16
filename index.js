@@ -21,6 +21,11 @@ app.get("/", (req, res) => {
     res.render("index");
 })
 
+app.get('/termos.ejs', (req, res) => {
+    res.render('termos');
+  });
+  
+
 app.listen(3030, () => {
     console.log("server on");
 })

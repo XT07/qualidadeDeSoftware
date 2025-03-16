@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('preview.jpg') no-repeat center center/cover;
+    background-attachment: fixed;
+}
+
+.termos {
+    width: 900px;
+    max-width: 900px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    padding: 30px 40px;
+    border-radius: 10px;
+    z-index: 10;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.termos h1 {
+    font-size: 36px;
+    text-align: center;
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    margin: 0;
+    border-radius: 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.termos p {
+    font-size: 14.5px;
+    color: #fff;
+    text-align: left;
+    padding: 15px 20px;
+    white-space: normal;
+    word-wrap: break-word;
+    margin-top: 0;
+}
+
+.termos li {
+    font-size: 14.5px;
+    color: #fff;
+    text-align: left;
+    white-space: normal;
+}
+
+.termos p + ul {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.termos p {
+    margin-bottom: 0;
+}
+
+/* Estilo do botão */
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 16px;
+    color: #000; /* Cor do texto preta */
+    background-color: #fff; /* Cor de fundo branca */
+    border: 2px solid #fff; /* Borda branca */
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    margin-left: auto; /* Alinha o botão à direita */
+    margin-top: 20px; /* Adiciona um pequeno espaçamento acima do botão */
+}
+
+/* Efeito de hover no botão */
+.btn:hover {
+    background-color: rgba(255, 255, 255, 0.8); /* Leve transparência ao passar o mouse */
+    border-color: #ddd; /* Borda cinza-claro no hover */
+    color: #000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
