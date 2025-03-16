@@ -3,8 +3,16 @@ const app = express();
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const routUser = require("./userRouts/routControl.js");
+const connection = require("./db/connection.js");
 
-//nesse espaço faça a autenticação do DB
+connection
+    .authenticate()
+    .then(() => {
+        console.log("Conectado com o db");
+    })
+    .catch(err => {
+        console.log(`Erro ao conectar com o db | ${err}`);
+    });
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
