@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const session = require("express-session");
+const routUser = require("./userRouts/routControl.js");
 
 //nesse espaço faça a autenticação do DB
 
@@ -15,9 +17,11 @@ app.use(session({
     }
 }))
 
+app.use("/", routUser);
+
 ///aqui colocaremos as rotas sem relação entre si no sentido de que não tem uma certa "administração" em cima delas
 app.get("/", (req, res) => {
-    res.send("Aguardando a criação da página principal");
+    res.render("index");
 })
 
 app.listen(3030, () => {
