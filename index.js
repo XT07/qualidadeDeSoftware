@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const routUser = require("./userRouts/routControl.js");
 const connection = require("./db/connection.js");
+const code = require("./config/codeSend.js");
 
 connection
     .authenticate()
@@ -26,6 +27,7 @@ app.use(session({
 }))
 
 app.use("/", routUser);
+app.use("/", code);
 
 ///aqui colocaremos as rotas sem relação entre si no sentido de que não tem uma certa "administração" em cima delas
 app.get("/", (req, res) => {

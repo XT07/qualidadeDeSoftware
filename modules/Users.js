@@ -8,9 +8,10 @@ const User = connection.define("Users", {
     },
     email: {
         type: sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
-    recuperationEmail: {
+    recovery_email: {
         type: sequelize.STRING,
         allowNull: false
     },
@@ -18,14 +19,18 @@ const User = connection.define("Users", {
         type: sequelize.STRING,
         allowNull: false
     },
-    celphone: {
-        type: sequelize.NUMBER,
+    phone: {
+        type: sequelize.STRING,
         allowNull: false
     }
-})
-
-URLSearchParams.sync({ force: false }).then(() => {
-    console.log("Tabela sincronizada");
-}).catch(err => {
-    console.log(`Erro ao sincronizar a tabela | ${err}`);
 });
+
+User.sync({ force: false })
+    .then(() => {
+        console.log("Tabela Users sincronizada");
+    })
+    .catch(err => {
+        console.log(`Erro ao sincronizar a tabela | ${err}`);
+    });
+
+module.exports = User;
