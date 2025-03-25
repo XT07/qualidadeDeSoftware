@@ -10,10 +10,10 @@
 
 <body>
     <div class="wrapper">
-        <form action="/user" method="patch" class="form">
+        <form action="/userupt" method="post" class="form">
             <h1>Alterar Perfil</h1>
             <div class="input-box">
-                <input type="text" id="name" name="full-name" placeholder="Nome completo" value="<%- user.name %>" required>
+                <input type="text" id="name" name="name" placeholder="Nome completo" value="<%- user.name %>" required>
             </div>
             <div class="input-box">
                 <input type="text" id="cpf" name="cpf" placeholder="CPF" value="<%- user.cpf %>" required>
@@ -30,7 +30,7 @@
             <div class="input-box">
                 <input type="email" id="recovery_email" name="recovery_email" placeholder="E-mail de recuperação" value="<%- user.recovery_email %>" required>
             </div>
-            <button type="submit" class="btn">Salvar Alterações</button>
+            <input type="submit" class="btn" value="Salvar Alterações">
         </form>
     </div>
 </body>

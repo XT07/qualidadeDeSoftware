@@ -10,18 +10,19 @@
 
 <body>
     <div class="wrapper">
-        <form action="/resetPassword" method="POST" class="form">
+        <form action="/sendcode" method="post" class="form">
             <h1>Esqueceu a Senha</h1>
-            <p style="color: #fff; margin-top: 10px;">Um código de recuperação foi enviado ao seu email de recuperação.
-            </p>
+            <p style="color: #fff; margin-top: 10px;">Um código de recuperação vai ser enviado ao seu email de recuperação.</p>
             <div class="input-box">
-                <input type="text" id="recoveryCode" name="recoveryCode" placeholder="Código de Recuperação" required>
+                <input type="email" id="email" name="email" placeholder="Coloque o seu e-mail">
+            </div>
+            <input type="submit" value="Enviar código" class="btn">
+        </form>
+        <form action="/verifycode" method="POST" class="form">
+            <div class="input-box">
+                <input type="text" id="code" name="code" placeholder="Código de Recuperação" required>
             </div>
             <button type="submit" class="btn">Verificar código</button>
-            <div class="login-link">
-                <p style="color: #fff; margin-top: 10px;">Sem acesso a este email? <a href="telefone.ejs"
-                        style="color: #fff; font-weight: 700;">Tente outro método</a></p>
-            </div>
         </form>
     </div>
 </body>

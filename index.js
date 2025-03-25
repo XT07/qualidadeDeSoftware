@@ -5,6 +5,9 @@ const session = require("express-session");
 const routUser = require("./userRouts/routControl.js");
 const connection = require("./db/connection.js");
 const code = require("./config/codeSend.js");
+const midleware = require("./midleware/midleware.js");
+const methodOverride = require('method-override');
+
 
 connection
     .authenticate()
@@ -25,6 +28,7 @@ app.use(session({
         maxAge: 2592000000//define o tempo q as informações do usuario ficam salvas no sistema (oq não estiver no DB)
     }
 }))
+app.use(methodOverride('_method'));
 
 app.use("/", routUser);
 app.use("/", code);
@@ -34,7 +38,7 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
-app.get("/home", (req, res) => {
+app.get("/home", midleware, (req, res) => {
     res.render("home");
 })
 

@@ -6,7 +6,7 @@ const midleware = require("../midleware/midleware");
 
 const salt = bcrypt.genSaltSync(10);
 
-router.get("/user", midleware, (req, res) => {
+router.get("/profyle", midleware, (req, res) => {
     users.findOne({ where: {id: req.session.user.id} }).then(user => {
         res.render("perfil", {
             user: user
@@ -35,7 +35,7 @@ router.post("/loginUser", (req, res) => {
                 name: user.name,
                 email: user.email,
                 cpf: user.cpf,
-                pass: pass,
+                pass: user.password,
                 birth_date: user.birth_date,
                 phone: user.phone,
                 recovery_email: user.recovery_email
@@ -75,24 +75,20 @@ router.post("/user", async (req, res) => {
     })
 });
 
-router.patch("/user", midleware, async (req, res) => {
+router.post("/userupt", midleware, (req, res) => {
     let cpf = parseInt(req.body.cpf);
-    let { name, password, email, birth_date, phone, recovery_email } = req.body;
+    let { name, email, birth_date, phone, recovery_email } = req.body;
 
-    let hash = await bcrypt.hashSync(password, salt)
-
-    let subData = {
+    users.set({
         name: name,
-        password: hash,
         email: email,
         birth_date: birth_date,
         cpf: cpf,
         phone: phone,
         recovery_email: recovery_email
-    }
-
-    users.update(subData, { where: { id:req.session.id } }).then(() => {
-        res.redirect("/user");
+    }, { where: { id:req.session.id } }).then(() => {
+        res.redirect("/home");
+        console.log(subData);
     }).catch(err => {
         res.sendStatus(400);
         console.log(`Erro ao tentar atualizar o usuário || ERR ${err}`);
