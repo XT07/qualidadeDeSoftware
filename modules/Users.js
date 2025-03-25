@@ -6,6 +6,15 @@ const User = connection.define("Users", {
         type: sequelize.STRING,
         allowNull: false
     },
+    cpf: {
+        type: sequelize.STRING,
+        allowNull: false,
+        unique: true
+    },
+    birth_date: {
+        type: sequelize.STRING,
+        allowNull: false
+    },
     email: {
         type: sequelize.STRING,
         allowNull: false,

@@ -10,13 +10,13 @@
 </head>
 <body>
     <div class="wrapper">
-        <form action="user" method="POST" class="form">
+        <form action="/user" method="POST" class="form">
             <h1>Cadastro</h1>
             <div class="input-box">
                 <input type="text" id="name" name="full-name" placeholder="Nome completo" required>
             </div>
             <div class="input-box">
-                <input type="text" id="cpf" name="cpf" placeholder="CPF" required>
+                <input type="text" id="cpf" name="cpf" placeholder="CPF - apenas números" required maxlength="11">
             </div>
             <div class="input-box">
                 <input type="date" id="birth_date" name="birth_date" placeholder="Data de nascimento" required>
@@ -35,10 +35,9 @@
             </div>
             <button type="submit" class="btn">Cadastrar</button>
             <div class="register-link">
-                <p>Já tem uma conta? <a href="index.ejs">Faça Login</a></p>
+                <p>Já tem uma conta? <a href="/">Faça Login</a></p>
             </div>
         </form>
     </div>
 </body>
-
 </html>

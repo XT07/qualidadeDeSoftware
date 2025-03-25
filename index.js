@@ -32,7 +32,16 @@ app.use("/", code);
 ///aqui colocaremos as rotas sem relação entre si no sentido de que não tem uma certa "administração" em cima delas
 app.get("/", (req, res) => {
     res.render("index");
+});
+
+app.get("/home", (req, res) => {
+    res.render("home");
 })
+
+app.get('/termos', (req, res) => {
+    res.render('termos');
+});
+  
 
 app.listen(3030, () => {
     console.log("server on");

@@ -1,18 +1,25 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
+const users = require("../modules/Users");
 
 router.get("/user", (req, res) => {
     let id = req.session.user.id;
 
     users.findOne({ where: {id:id} }).then(user => {
         res.sendStatus(200);
-        res.send("Página em desenvolvimento");
+        res.render("perfil", {
+            user: user
+        });
     })
 });
 
+router.get("/recovery", (req, res) => {
+    res.render("senha");
+})
+
 router.get("/registerUser", (req, res) => {
-    res.send("Em desenvolvimento");
+    res.render("cadastro");
 });
 
 router.post("/loginUser", (req, res) => {
@@ -36,7 +43,7 @@ router.post("/loginUser", (req, res) => {
             }
 
             res.sendStatus(200);
-            res.redirect("/user");
+            res.redirect("/home");
         }else{
             res.sendStatus(401);
             console.log(`Senha não encontrado no nosso sistema por favor tente novamente`);
@@ -62,11 +69,11 @@ router.post("/user", (req, res) => {
         phone: phone,
         recovery_email: recovery_email
     }).then(() => {
+        res.redirect("/home");
         res.sendStatus(200);
-        res.redirect("/user");
     }).catch(err => {
-        res.sendStatus(400);
         console.log(`Não foi possivel criar o usuário || ERR ${err}`);
+        res.sendStatus(400);
     })
 });
 
@@ -90,7 +97,7 @@ router.patch("/user", (req, res) => {
         res.redirect("/user");
     }).catch(err => {
         res.sendStatus(400);
-        console.log(`Erro ao tentar atualizar p usuário || ERR ${err}`);
+        console.log(`Erro ao tentar atualizar o usuário || ERR ${err}`);
     })
 });
 
