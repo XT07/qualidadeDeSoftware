@@ -2,10 +2,11 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const users = require("../modules/Users");
+const midleware = require("../midleware/midleware");
 
 const salt = bcrypt.genSaltSync(10);
 
-router.get("/user", (req, res) => {
+router.get("/user", midleware, (req, res) => {
     users.findOne({ where: {id: req.session.user.id} }).then(user => {
         res.render("perfil", {
             user: user
@@ -74,8 +75,7 @@ router.post("/user", async (req, res) => {
     })
 });
 
-router.patch("/user", async (req, res) => {
-    let id = req.session.id;
+router.patch("/user", midleware, async (req, res) => {
     let cpf = parseInt(req.body.cpf);
     let { name, password, email, birth_date, phone, recovery_email } = req.body;
 
@@ -91,7 +91,7 @@ router.patch("/user", async (req, res) => {
         recovery_email: recovery_email
     }
 
-    users.update(subData, { where: { id:id } }).then(() => {
+    users.update(subData, { where: { id:req.session.id } }).then(() => {
         res.redirect("/user");
     }).catch(err => {
         res.sendStatus(400);
@@ -99,12 +99,11 @@ router.patch("/user", async (req, res) => {
     })
 });
 
-router.delete("/user", async (req, res) => {
-    let id = parseInt(req.body.id);
-    let verific = await users.findOne({ where: {id:id} });
+router.delete("/user", midleware, async (req, res) => {
+    let verific = await users.findOne({ where: {id:req.session.id} });
 
     if(verific){
-        users.destroy({ where: {id:id} }).then(() => {
+        users.destroy({ where: {id:req.session.id} }).then(() => {
             res.redirect("/");
         }).catch(err => {
             res.sendStatus(400);
