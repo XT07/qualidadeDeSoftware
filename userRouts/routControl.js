@@ -41,9 +41,8 @@ router.post("/loginUser", (req, res) => {
                 recovery_email: user.recovery_email
             }
             res.redirect("/home");
-            console.log(req.session.user.id);
         }else{
-            res.sendStatus(401);
+            res.redirect("/");
             console.log(`Senha não encontrado no nosso sistema por favor tente novamente`);
         }
         
@@ -79,16 +78,15 @@ router.post("/userupt", midleware, (req, res) => {
     let cpf = parseInt(req.body.cpf);
     let { name, email, birth_date, phone, recovery_email } = req.body;
 
-    users.set({
+    users.update({
         name: name,
         email: email,
         birth_date: birth_date,
         cpf: cpf,
         phone: phone,
         recovery_email: recovery_email
-    }, { where: { id:req.session.id } }).then(() => {
+    }, { where: { id:req.session.user.id } }).then(() => {
         res.redirect("/home");
-        console.log(subData);
     }).catch(err => {
         res.sendStatus(400);
         console.log(`Erro ao tentar atualizar o usuário || ERR ${err}`);
