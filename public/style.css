@@ -6,7 +6,7 @@
     box-sizing: border-box;
     font-family: Poppins, sans-serif;
 }
-body{
+body {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,7 +16,7 @@ body{
     background-position: center;
     margin-top: 20px;
     margin-bottom: 20px;
-    overflow: hidden;
+    overflow-y: auto; /* Permite rolagem vertical quando necessário */
 }
 .wrapper{
     width: 420px;
