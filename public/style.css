@@ -94,7 +94,6 @@ body{
     border-radius: 40px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .1);
     cursor: pointer;
-    color: #0000ade7;
     font-size: 16px;
     font-weight: 600;
 }
@@ -175,20 +174,7 @@ body{
 
 /* Estilo do botão */
 .btn {
-    display: inline-block;
-    padding: 15px 30px;
-    font-size: 16px;
-    color: #000; /* Cor do texto preta */
-    background-color: #fff; /* Cor de fundo branca */
-    border: 2px solid #fff; /* Borda branca */
-    border-radius: 10px;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
-    margin-left: auto; /* Alinha o botão à direita */
-    margin-top: 20px; /* Adiciona um pequeno espaçamento acima do botão */
+    color: #000;
 }
 
 /* Efeito de hover no botão */
