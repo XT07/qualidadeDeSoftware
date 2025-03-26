@@ -8,7 +8,9 @@ const codes = new Map();
 
 // Configuração do transporte do Nodemailer
 const transporter = nodemailer.createTransport({
-    service: 'Gmail',
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
     auth: {
         user: 'emailrecoveryquadsoft@gmail.com', // Substitua pelo seu email
         pass: 'Sen@caula' // garanta que tem gmail tem liberação para acesso de terceiros 
@@ -25,12 +27,12 @@ router.post('/sendcode', async (req, res) => {
     
     try {
         await transporter.sendMail({
-            from: 'emailrecoveryquadsoft@gmail.com',
+            from: 'Código de segurança <emailrecoveryquadsoft@gmail.com>',
             to: email,
             subject: 'Seu Código de Autenticação da uabadabdabdubdub Interpress',
             text: `Seu código de autenticação é: ${code}`
         });
-        res.render("/recovery");
+        res.redirect("/recovery");
     } catch (error) {
         res.status(500).json({ error: 'Erro ao enviar email', details: error });
     }
@@ -45,9 +47,7 @@ router.post('/verifycode', (req, res) => {
     if (codes.get(email) === code) {
         codes.delete(email); // Remover código após validação bem-sucedida
         users.findOne({ where: { id:req.session.user.id } }).then(user => {
-            res.render("/perfil", {
-                user: user
-            });
+            res.redirect("/recovery");
         })
     } else {
         res.status(400).json({ error: 'Código inválido' });
